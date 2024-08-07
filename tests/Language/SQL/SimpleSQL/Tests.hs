@@ -32,6 +32,7 @@ import Language.SQL.SimpleSQL.Tpch
 import Language.SQL.SimpleSQL.LexerTests
 import Language.SQL.SimpleSQL.EmptyStatement
 import Language.SQL.SimpleSQL.CreateIndex
+import Language.SQL.SimpleSQL.CreateTable
 
 import Language.SQL.SimpleSQL.SQL2011Queries
 import Language.SQL.SimpleSQL.SQL2011AccessControl
@@ -75,6 +76,7 @@ testData =
     ,emptyStatementTests
     ,createIndexTests
     ,errorMessageTests
+    ,createTableTests
     ]
 
 tests :: SpecWith ()

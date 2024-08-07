@@ -91,6 +91,7 @@ Test-Suite Tests
                        Language.SQL.SimpleSQL.CreateIndex
                        Language.SQL.SimpleSQL.Expectations
                        Language.SQL.SimpleSQL.TestRunners
+                       Language.SQL.SimpleSQL.CreateTable
                        
   ghc-options:         -threaded
 
