@@ -689,6 +689,16 @@ cast = keyword_ "cast" *>
                     <*> (keyword_ "as" *> typeName))
 
 {-
+=== Postgres-style typecast
+
+castPostgres: expr::type
+-}
+
+castPostgresSuffix :: Parser (ScalarExpr -> ScalarExpr)
+castPostgresSuffix = guardDialect diPostgresSymbols *>
+                     (flip Cast <$> (symbol "::" *> typeName))
+
+{-
 === convert
 
 convertSqlServer: SqlServer dialect CONVERT(data_type(length), expression, style)
@@ -1214,10 +1224,12 @@ messages, but both of these are too important.
 
 opTable :: Bool -> [[E.Operator Parser ScalarExpr]]
 opTable bExpr =
-        [-- parse match and quantified comparisons as postfix ops
+        [[postfix castPostgresSuffix]
+
+          -- parse match and quantified comparisons as postfix ops
           -- todo: left factor the quantified comparison with regular
           -- binary comparison, somehow
-         [postfix $ try quantifiedComparisonSuffix
+        ,[postfix $ try quantifiedComparisonSuffix
          ,postfix matchPredicateSuffix]
 
         ,[binarySymL "."]

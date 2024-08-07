@@ -278,6 +278,8 @@ TODO: get all the commented out tests working
     -- this can be added for the postgres dialect when it is written
     --,t "SELECT distributors.* WHERE distributors.name = 'Westward';"
 
+    ,t "SELECT ''::text;"
+
     ]
   where
     t :: HasCallStack => Text -> TestItem
